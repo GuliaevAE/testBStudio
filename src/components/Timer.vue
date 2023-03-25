@@ -25,7 +25,7 @@ export default {
 
       isOn: false,
       timer: null,
-      seconds: 0,
+      seconds: null,
       minutes: null,
       hours: null
     };
@@ -33,7 +33,8 @@ export default {
   methods: {
     play() {
       this.isOn = true;
-      this.timer = setInterval(() => (this.seconds += 1), 10);
+      this.seconds = 0;
+      this.timer = setInterval(() => (this.seconds += 1), 1000);
     },
     pause() {
       this.isOn = false;
@@ -58,12 +59,7 @@ export default {
         this.hours ? (this.hours += 1) : (this.hours = 1);
       }
 
-      let hh =
-        this.hours !== null
-          ? this.hours >= 10
-            ? this.hours + ":"
-            : "0" + this.hours + ":"
-          : "";
+      let hh = this.hours !== null ? this.hours + ":" : "";
       let mm =
         this.minutes !== null
           ? this.minutes >= 10
@@ -71,7 +67,12 @@ export default {
             : "0" + this.minutes + ":"
           : "";
 
-      let ss = this.seconds >= 10 ? this.seconds : "0" + this.seconds;
+      let ss =
+        this.seconds !== null
+          ? this.seconds >= 10
+            ? this.seconds
+            : "0" + this.seconds
+          : "0";
       return hh + mm + ss;
     }
   }
