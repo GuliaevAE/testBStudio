@@ -43,7 +43,7 @@ export default {
     stop() {
       this.isOn = false;
       clearInterval(this.timer);
-      this.seconds = 0;
+      this.seconds = null;
       this.minutes = null;
       this.hours = null;
     }
